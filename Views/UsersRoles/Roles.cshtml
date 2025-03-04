@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+@{
+    ViewData["Title"] = "Roles page";
+}
+<form class="mt-3" method="post" asp-controller="UsersRoles" asp-action="CreateRole">
+    <div asp-validation-summary="All"></div>
+    <table class="w-50">
+        <tr>
+            <td><input type="text" name="roleName" class="form-control" /></td>
+            <td><button type="submit" class="btn btn-primary">Add role</button></td>
+        </tr>
+    </table>
+</form>
+<table class="table w-50 mt-3">
+    <tr><th>Role name</th><th></th></tr>
+    @foreach (var role in Model)
+    {
+        <tr>
+            <td>@role.Name</td>
+            <td class="position-relative">
+                <a class="btn btn-sm btn-danger position-absolute end-0" asp-controller="UsersRoles" asp-action="DeleteRole" asp-route-id="@role.Id">Delete</a>
+                @* <form method="get" asp-controller="UsersRoles" asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+                    <button type="submit" class="btn btn-sm btn-danger position-absolute end-0">Delete</button>
+                </form> *@
+            </td>
+        </tr>
+    }
+</table>

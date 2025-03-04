@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model DevPlatform.ViewModels.UserRoleViewModel
+
+<form method="post" asp-controller="UsersRoles" asp-action="EditUserRole">
+    <div>
+        <h3>@Model.UserEmail user's roles</h3>
+    </div>
+    <div class="mt-3">
+        <input type="hidden" asp-for="UserId" />
+        <table class="table table-bordered w-25">
+            @foreach (IdentityRole role in Model.AllRoles)
+            {
+                <tr>
+                    <td>
+                        <input class="form-check-input" type="checkbox" name="roles" value="@role.Name"
+                        @(Model.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "") />
+                    </td>
+                    <td class="align-middle">
+                        <label class="form-check-label">@role.Name</label>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="mt-3">
+        <input type="submit" class="btn btn-primary" value="Save" />
+    </div>
+</form>

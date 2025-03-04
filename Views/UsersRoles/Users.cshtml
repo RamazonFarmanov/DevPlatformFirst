@@ -1,0 +1,57 @@
+﻿@using DevPlatform.ViewModels
+@model UserRoleListViewModel
+@{
+    ViewData["Title"] = "Users Page";
+    ViewData["Roles"] = "";
+}
+<a asp-controller="UsersRoles" asp-action="CreateUser">Add user</a>
+<div asp-validation-summary="ModelOnly"></div>
+<form method="post" asp-controller="UsersRoles" asp-action="DeleteUsers">
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th></th>
+            <th width="30%" class="position-relative"><p class="position-absolute end-50">Select all <input class="form-check-input" type="checkbox" id="select-all" /></p></th>
+            <th width="10%" class="position-relative"><button type="submit" class="btn btn-sm btn-danger position-absolute end-50">Delete</button></th>
+        </tr>
+        @for (int i = 0; i < Model.Users.Count; i++)
+        {
+            <tr>
+                <td>@Model.Users[i].UserName</td>
+                <td>@Model.Users[i].UserEmail<input type="hidden" asp-for="@Model.Users[i].UserEmail" /></td>
+                <td>
+                    @if (Model.Users[i].UserRoles.Count != 0)
+                    {
+                        ViewData["Roles"] = "";
+                        for (int j = 0; j < Model.Users[i].UserRoles.Count; j++)
+                        {
+                            ViewData["Roles"] += Model.Users[i].UserRoles[j];
+                            if (j != Model.Users[i].UserRoles.Count - 1)
+                            {
+                                ViewData["Roles"] += ", ";   
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ViewData["Roles"] = "Edit roles";
+                    }
+                    <a asp-controller="UsersRoles" asp-action="EditUserRole" asp-route-id="@Model.Users[i].UserId">@ViewData["Roles"]</a>
+                </td>
+                <td class="position-relative">
+                    <input class="form-check-input position-absolute end-50 item-checkbox" type="checkbox" asp-for="@Model.Users[i].Selected" />
+                    </td>
+                <td class="position-relative">
+                    <a class="btn btn-sm btn-primary position-absolute end-50" asp-controller="UsersRoles" asp-action="EditUser" asp-route-id="@Model.Users[i].UserId">Edit</a>
+                </td>
+            </tr>
+        }
+    </table>
+</form>
+<script>
+    document.getElementById("select-all").addEventListener("change", function () {
+        let checkboxes = document.querySelectorAll(".item-checkbox");
+        checkboxes.forEach(cb => cb.checked = this.checked);
+    });
+</script>

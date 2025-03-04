@@ -1,0 +1,57 @@
+﻿@model DevPlatform.ViewModels.SignInViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>Log In</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MyForms.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header text-center">
+                        <h3>Login</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="Authentication" asp-action="SignIn" method="post">
+                            <div asp-validation-summary="ModelOnly"></div>
+                            <div class="mb-3">
+                                <label asp-for="Email" class="form-label"></label>
+                                <input asp-for="Email" class="form-control" placeholder="Enter your email" />
+                                <span asp-validation-for="Email"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Password" class="form-label"></label>
+                                <input asp-for="Password" class="form-control" placeholder="Enter your password" />
+                                <span asp-validation-for="Password"></span>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input asp-for="RememberMe" class="form-check-input" />
+                                <label asp-for="RememberMe" class="form-check-label"></label>
+                            </div>
+                            <div>
+                                <input type="submit" class="btn btn-primary w-100" value="Sign in" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <small>
+                            Don't have an account?
+                            <a asp-controller="Authentication" asp-action="SignUp">Register here</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

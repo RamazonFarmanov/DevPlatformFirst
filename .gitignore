@@ -1,0 +1,22 @@
+# Игнорируем временные файлы и кэш
+bin/
+obj/
+.vscode/
+.idea/
+*.user
+*.suo
+*.vs
+*.db
+
+# Игнорируем зависимости NuGet
+packages/
+project.lock.json
+
+# Игнорируем файлы конфигурации среды
+*.config
+*.env
+secrets.json
+
+# Игнорируем логи
+logs/
+*.log
